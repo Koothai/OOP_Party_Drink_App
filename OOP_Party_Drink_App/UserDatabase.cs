@@ -23,7 +23,7 @@ public class UserDatabase
     public bool UserExists(string username)
     {
         using var db = new LiteDatabase(_dbPath);
-        var users = db.GetCollection<User>("users");
+        var users = db.GetCollection<User>("users"); 
         return users.Exists(u => u.Username == username);
     }
     public void UpdateUser(User user)
