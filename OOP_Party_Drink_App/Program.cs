@@ -41,7 +41,7 @@ class Program
         if (currentUser.DislikedFlavors == null || currentUser.DislikedFlavors.Count == 0)
         {
             AskPreferences(currentUser);
-            userDb.UpdateUser(currentUser); // artık sadece update
+            userDb.UpdateUser(currentUser); 
         }
 
         while (true)
@@ -112,8 +112,8 @@ class Program
         string password = Console.ReadLine();
 
         var newUser = new User { Username = username, Password = password };
-        AskPreferences(newUser);                  // ⬅️ 1) ANKETİ BURADA SOR
-        userDb.InsertUser(newUser);               // ⬅️ 2) USER’I BURADA KAYDET
+        AskPreferences(newUser);                 
+        userDb.InsertUser(newUser);              
 
         return newUser;
     }
@@ -131,7 +131,6 @@ class Program
         user.Creamy = AskEnumSelection<CreamyPreference>("Do you enjoy creamy drinks?");
         user.Adventurousness = AskEnumSelection<FlavorOpenness>("How adventurous are you with trying new flavors?");
 
-        // Disliked Flavors: Şıkla ve çoklu seçimle
         user.DislikedFlavors = new List<string>();
         bool addMore = true;
         while (addMore)

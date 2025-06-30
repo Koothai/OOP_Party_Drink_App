@@ -5,10 +5,8 @@ public class RecommendationEngine
 {
     public List<Cocktail> Recommend(User user, List<Cocktail> allCocktails)
     {
-        // Eğer kullanıcı hiç beğenmediği flavor seçmemişse veya DislikedFlavors null ise, boş liste olarak kullan
         var dislikedList = user.DislikedFlavors ?? new List<string>();
 
-        // Filtre: Kullanıcının beğenmediği flavorlardan hiçbirini içermeyen kokteyller
         var filtered = allCocktails
             .Where(c => !c.Ingredients.Any(ing =>
                 dislikedList.Any(df => df.Equals(ing, System.StringComparison.OrdinalIgnoreCase))
@@ -19,14 +17,13 @@ public class RecommendationEngine
                 Score = GetMatchScore(user, c)
             })
             .OrderByDescending(x => x.Score)
-            .Take(5) // en iyi 5 kokteyl
+            .Take(5) 
             .Select(x => x.Cocktail)
             .ToList();
 
         return filtered;
     }
 
-    // Skor mantığı: Kullanıcıya en uygun kokteyller öne çıkar
     private int GetMatchScore(User user, Cocktail c)
     {
         int score = 0;
