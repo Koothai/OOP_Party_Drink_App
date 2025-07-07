@@ -3,7 +3,7 @@ using System.Linq;
 
 public class RecommendationEngine
 {
-    public List<Cocktail> Recommend(User user, List<Cocktail> allCocktails)
+    public List<CocktailBase> Recommend(User user, List<CocktailBase> allCocktails)
     {
         var dislikedList = user.DislikedFlavors ?? new List<string>();
 
@@ -24,7 +24,7 @@ public class RecommendationEngine
         return filtered;
     }
 
-    private int GetMatchScore(User user, Cocktail c)
+    private int GetMatchScore(User user, CocktailBase c)
     {
         int score = 0;
         if (c.Taste == user.Taste) score += 2;
