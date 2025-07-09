@@ -124,6 +124,11 @@ public class CocktailDatabase
     public List<CocktailBase> GetAllCocktails()
     {
         using var db = new LiteDatabase(_dbPath);
-        return db.GetCollection<CocktailBase>("cocktails").FindAll().ToList();
+
+        var alcoholic = db.GetCollection<AlcoholicCocktail>("cocktails").FindAll().Cast<CocktailBase>();
+        var nonAlcoholic = db.GetCollection<NonAlcoholicCocktail>("cocktails").FindAll().Cast<CocktailBase>();
+
+        return alcoholic.Concat(nonAlcoholic).ToList();
     }
+
 }
