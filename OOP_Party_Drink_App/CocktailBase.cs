@@ -11,7 +11,7 @@ public abstract class CocktailBase
     public AlcoholPreference AlcoholType { get; set; }
     public TemperaturePreference Temperature { get; set; }
     public SweetnessLevel Sweetness { get; set; }
-    public abstract bool IsCreamy { get; }
 
-    public abstract string GetTypeDescription(); 
+    public abstract bool IsCreamy { get; set; }
+    public abstract string GetTypeDescription();
 }
